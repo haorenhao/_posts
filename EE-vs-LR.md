@@ -8,7 +8,7 @@ tags: [Explore-Exploit,E&E,MAB,Online-learning]
 
 [Explore-Exploit](https://en.wikipedia.org/wiki/Multi-armed_bandit)(E&E)通过主动展现的方式，让新物料都能得到一定的下发(explore)；同时，使用反馈学习，让低质的物料退场，高质的物继续下发(exploit)。从而缓解上述的马太效应。
 
-但在实际应用中，E&E比想象的要困难很多。本文通过对比E&E和LR，梳理一下做E&E实验需要注意的地方。
+但在实际应用中，E&E比想象的要困难很多。本文梳理了做E&E实验需要注意的地方。
 
 <!--more-->
 
