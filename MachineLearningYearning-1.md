@@ -4,7 +4,7 @@ date: 2016-12-10
 tags: [Machine Learning Yearning,读书笔记]
 ---
 
-读了几章Andrew NG新书 **Machine Learning Yearning**(v0.5)，非常适合实战，本系列记录一下个人的读书笔记。
+读了几章Andrew NG新书 **Machine Learning Yearning**(v0.5)，非常适合实战，本系列记录相应的读书笔记。
 
 # [Chapter 1~12](https://gallery.mailchimp.com/dc3a7ef4d750c0abfc19202a3/files/Machine_Learning_Yearning_V0.5_01.pdf "click to download") #
 
