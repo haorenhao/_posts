@@ -6,9 +6,9 @@ tags: [Machine Learning Yearning,读书笔记]
 
 读了几章Andrew NG新书 **Machine Learning Yearning**(v0.5)，非常适合实战，本系列记录相应的读书笔记。
 
-# [Chapter 1~12](https://gallery.mailchimp.com/dc3a7ef4d750c0abfc19202a3/files/Machine_Learning_Yearning_V0.5_01.pdf "click to download") #
-
 <!--more-->
+
+# [Chapter 1~12](https://gallery.mailchimp.com/dc3a7ef4d750c0abfc19202a3/files/Machine_Learning_Yearning_V0.5_01.pdf "click to download") #
 
 ## Train/Dev/Test sets ##
 1. 工程项目中，Train-set和Test-set的生成需和线上保持一致，单纯的随机抽样并不一定适合。
@@ -33,3 +33,11 @@ tags: [Machine Learning Yearning,读书笔记]
 > 有些评估指标可以转化为约束条件：e.g.运行时间，模型大小。
 > 拆解出约束条件后，再将多目标转化为单目标优化。
 
+# [Chapter 13](https://gallery.mailchimp.com/dc3a7ef4d750c0abfc19202a3/files/Machine_Learning_Yearning_V0.5_02.pdf "click to download") #
+
+## Basic Error Analysis ##
+看case非常重要。找到系统瓶颈，寻求突破点。
+> 反例：猫分类问题
+>    当前错误率是10%，其中只有5%的错误分类是“狗”误判。花一个月时间解决狗误判问题，精度只从90%提升只90.5%。
+
+Q&A：排序问题的case怎么归纳？<font color=red>//TODO</font>
