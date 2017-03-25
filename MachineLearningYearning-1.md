@@ -1,5 +1,5 @@
 ---
-title: Machine Learning Yearning 读书笔记 (Chapter 1~12)
+title: Machine Learning Yearning 读书笔记
 date: 2016-12-10
 tags: [Machine Learning Yearning,读书笔记]
 ---
@@ -41,3 +41,8 @@ tags: [Machine Learning Yearning,读书笔记]
 >    当前错误率是10%，其中只有5%的错误分类是“狗”误判。花一个月时间解决狗误判问题，精度只从90%提升只90.5%。
 
 Q&A：排序问题的case怎么归纳？<font color=red>//TODO</font>
+
+# [Chapter 14](https://gallery.mailchimp.com/dc3a7ef4d750c0abfc19202a3/files/Machine_Learning_Yearning_V0.5_03.pdf "click to download") #
+
+> in parallel
+> iterative

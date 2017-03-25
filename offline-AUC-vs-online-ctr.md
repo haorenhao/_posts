@@ -1,7 +1,7 @@
 ---
 title: 离线AUC和线上CTR
 date: 2016-10-29
-tags: [AUC,离线评估,CTR,机器学习]
+tags: [AUC,离线评估,CTR,机器学习,position bias, survive bias]
 ---
 
 在做Rank系统时，我们常用ROC曲线的AUC来做离线评估。
