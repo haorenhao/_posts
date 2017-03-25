@@ -15,15 +15,19 @@ tags: [TensorFlow,Online learning,FTRL,gradient descent,adgrad]
 
 ## Gradients computation ##
 和大部分的DL库一样，采用链式求导，自带的OP中都已经包含了gradient的求解，我们在使用时，只需要搭建forward的求LOSS/likelihood的图就行，然后选择优化器去训练就行。
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/gradients%20computation.png" width ="300" alt="baseline click model" align=center />
 
 ## Partial Execution ##
 根据client指定的fetch，自动查找依赖，进行部分计算。一方面避免了无效的计算，另一方面实现了图的"多态"(例如，图中e和f可以分别是模型的训练和评估。)
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/Partial%20Execution.png" width ="300" alt="baseline click model" align=center />
 
 ## Parallel training ##
 和其它的分布式计算一样，参数同步有异步和同步的两种形式。
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/parallel%20training.png" width ="300" alt="baseline click model" align=center />
 
 ## Queue ##
 Queue可以作为一个缓冲区，实现数据预处理和模型训练的并行。
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/Queue.gif" width ="300" alt="baseline click model" align=center />
 
 ---
 # 2. Online learning #
