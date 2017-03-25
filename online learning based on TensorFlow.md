@@ -1,5 +1,5 @@
 ---
-title: 基于TensorFlow的Online learning
+title: 基于TensorFlow的Online learning（TODO）
 date: 2017-03-25
 tags: [TensorFlow,Online learning,FTRL,gradient descent,adgrad]
 ---
@@ -15,25 +15,25 @@ tags: [TensorFlow,Online learning,FTRL,gradient descent,adgrad]
 
 ## Gradients computation ##
 和大部分的DL库一样，采用链式求导，自带的OP中都已经包含了gradient的求解，我们在使用时，只需要搭建forward的求LOSS/likelihood的图就行，然后选择优化器去训练就行。
-<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/gradients%20computation.png" width ="300" alt="baseline click model" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/gradients%20computation.png" width ="300" align=center />
 
 ## Partial Execution ##
 根据client指定的fetch，自动查找依赖，进行部分计算。一方面避免了无效的计算，另一方面实现了图的"多态"(例如，图中e和f可以分别是模型的训练和评估。)
-<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/Partial%20Execution.png" width ="300" alt="baseline click model" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/Partial%20Execution.png" width ="300" align=center />
 
 ## Parallel training ##
 和其它的分布式计算一样，参数同步有异步和同步的两种形式。
-<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/parallel%20training.png" width ="300" alt="baseline click model" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/parallel%20training.png" width ="300" align=center />
 
 ## Queue ##
 Queue可以作为一个缓冲区，实现数据预处理和模型训练的并行。
-<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/Queue.gif" width ="300" alt="baseline click model" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/Queue.gif" width ="300" align=center />
 
 ---
 # 2. Online learning #
 
 ## overall structure ##
-
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/recomend%20system.png" width ="300" align=center />
 online learning是一个相对于offline learning的概念。
 - 在offline learning中，图中的extract为ETL定期收集日志并提取样本；training为模型的定期训练batch training或者increment training。
 - 在online learning中，图中的extract为实时样本流；training为模型的online training。据说凤巢已经做到了流式的训练样本，直接更新线上的model；我们的实现为流式的训练样本，定期dump模型然后推到线上reload。
