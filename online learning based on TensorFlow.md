@@ -52,8 +52,10 @@ online learning是一个相对于offline learning的概念。
 ## 收益分析 ##
 - 提高时效性-->降低variance。
 - 适用场景：数据分布变化大(e.g. 资讯推荐)
-<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/error.png" width ="300" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/error.PNG" width ="500" align=center />
 
 # 3. 实战指南 #
-<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/lr.png" width ="300" align=center />
-<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/lrp.png" width ="300" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/lr.PNG" width ="500" align=center />
+
+
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/lrp.PNG" width ="500" align=center />
