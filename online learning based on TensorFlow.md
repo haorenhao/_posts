@@ -1,5 +1,5 @@
 ---
-title: 基于TensorFlow的Online learning（TODO）
+title: 基于TensorFlow的Online learning
 date: 2017-03-25
 tags: [TensorFlow,Online learning,FTRL,gradient descent,adgrad]
 ---
@@ -33,19 +33,27 @@ Queue可以作为一个缓冲区，实现数据预处理和模型训练的并行
 # 2. Online learning #
 
 ## overall structure ##
-<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/recomend%20system.png" width ="300" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/recomend%20system.png" width ="450" align=center />
 online learning是一个相对于offline learning的概念。
 - 在offline learning中，图中的extract为ETL定期收集日志并提取样本；training为模型的定期训练batch training或者increment training。
-- 在online learning中，图中的extract为实时样本流；training为模型的online training。据说凤巢已经做到了流式的训练样本，直接更新线上的model；我们的实现为流式的训练样本，定期dump模型然后推到线上reload。
+- 在online learning中，图中的extract为实时样本流；training为模型的online training。据说凤巢已经做到了流式的训练样本，直接更新线上的model；我们的实现为流式的训练样本，定期export模型然后推到线上reload。
 
 ## 实时样本流 ##
 - 使用kafka实时收集服务器生成的pv log和客户端实时上报的click log.
 - 使用storm流式的提取特征.
-- label的确认:用户的反馈行为是延时的。我们的实现中采用延时确认方式，收集到pv log后先提取特征，然后等待15分钟(具体时长是label正确性和样本流时效性的tradeoff)，如果收集到对应的click log则生成正样本，否则生成负样本。在Twitter的一篇文章中，收集到pv log中马上产出一个负样本，收集到click log后拼接上pv log产出一个正样本，这样做引入了一些"错误的负样本"但提高了样本流的时效性。
+- label的确认:用户的反馈行为上报是有延时的。我们的实现中采用延时确认方式，收集到pv log后先提取特征，然后等待15分钟(具体时长是label正确性和样本流时效性的tradeoff)，如果收集到对应的click log则生成正样本，否则生成负样本。在Twitter的一篇文章中，收集到pv log中马上产出一个负样本，收集到click log后拼接上pv log产出一个正样本，这样做引入了一些"错误的负样本"但提高了样本流的时效性。
 
-## online training (FTRL based on TF) ##
+## online training (based on TF) ##
+- TF支持长期学习，定期产出checkpoint，而且支持checkpoint热启动。要实现online training，只需要将数据流式的灌进去就行。
+- Queue：用一个FIFOQueue作为缓冲区，训练流程的触发的第一个OP为dequeue操作，如果queue为空，则hang住等待，如果queue有数据，则进行训练。
+- kafka reader：另外启一个线程，通过kafka reader从kafka中读取数据，执行enqueue把数据塞进去。
 
 
 ## 收益分析 ##
+- 提高时效性-->降低variance。
+- 适用场景：数据分布变化大(e.g. 资讯推荐)
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/error.png" width ="300" align=center />
 
-# 3. 踩坑指南 #
+# 3. 实战指南 #
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/lr.png" width ="300" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/lrp.png" width ="300" align=center />
