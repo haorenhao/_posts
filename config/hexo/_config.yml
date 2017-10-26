@@ -77,7 +77,8 @@ theme: yilia
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: https://github.com/haorenhao/haorenhao.github.io.git
 
 # yilia theme
 jsonContent:

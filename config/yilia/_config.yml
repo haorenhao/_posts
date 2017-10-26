@@ -114,8 +114,8 @@ slider:
 #  friends: false
 smart_menu:
   innerArchive: '所有文章'
-#  friends: '友链'
   aboutme: '关于我'
+#  friends: '友链'
 
 friends:
   友情链接1: http://localhost:4000/
