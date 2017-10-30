@@ -24,6 +24,12 @@ tags: [Machine Learning Yearning,读书笔记]
 > 下限：足够体现diff。不设上限，但是过大会造成浪费，影响迭代效率。
 > e.g. 分类精度从90.0%提高到90.1%，则起码需要1000个样本才能体现diff。为了消除波动，可以加大到1W。但是没必要加大到1KW，影响迭代效率。
 
+4. 考虑添加Train_Dev集，如下图所示。（个人思考，书中没写）
+
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/imgs/%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86.png" width ="700" alt="DataSet" align=center />
+
+
+
 ## One Single-Number Evaluation Metric ##
 1. 单评估指标！多评估指标很难判断哪个模型更优。
 > Precision+Recall --> F1 score
