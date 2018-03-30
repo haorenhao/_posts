@@ -1,5 +1,11 @@
 NG - Deep Learning AI 学习笔记
 
+---
+title: NG - Deep Learning AI 学习笔记
+date: 2018-01-05
+tags: [Deep Learning, AI, 读书笔记]
+---
+
 # 正则化
 1. L1/L2正则: 需要调超参。
 2. dropout: 随机性，不可复现。
