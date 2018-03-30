@@ -55,6 +55,9 @@ online learning是一个相对于offline learning的概念。
 <img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/error.PNG" width ="500" align=center />
 
 # 3. 实战指南 #
+- Online learning 在工业应用时，受限于时间，往往无法充分训练，用一个相对大的学习率，效果可能会更好。
+- FTRL 相比于 OGD 有两个特性，a.稀疏解，b.学习率衰减。其中在工程中a是很有用的，但是b在某些场景会造成模型固化，例如：在新闻推荐里，对时效要求很高（今天受欢迎的推荐，明天继续推也许会是badcase），但是学习率衰减后，需要更多的badcase样本才能让模型修正回来。所以可以将lr_power调整为0.0，在保障稀疏解的同时，缓解模型固化现象。
+
 <img src="https://raw.githubusercontent.com/haorenhao/_posts/master/online%20learning%20based%20on%20TensorFlow/lr.PNG" width ="500" align=center />
 
 
