@@ -1,7 +1,7 @@
 ---
 title: 离线AUC和线上CTR
 date: 2016-10-29
-tags: [AUC,离线评估,CTR,机器学习,position bias, survive bias]
+tags: [AUC,离线评估,CTR,机器学习,position bias, Survivorship bias]
 ---
 
 在做Rank系统时，我们常用ROC曲线的AUC来做离线评估。
@@ -86,7 +86,7 @@ AUC更适合做Rank离线评估的原因有以下几点：
 |  ---  |  ---  | i5    |  -    | 0.06    | 0.5     |
 |  ---  |  ---  | i6    |  -    | 0.04    | 0.6     |
 
-> 离线评估只能在历史展现过的数据上进行，对于未展现的数据不知道，存在survive bias。
+> 离线评估只能在历史展现过的数据上进行，对于未展现的数据不知道，存在Survivorship bias
 > 
 > 在上述的例子中，我们先站在上帝的视角假设，用户u1对item的真实偏好程度为 *i2>i1>i3>i4>i5>i6*
 > 
@@ -113,4 +113,4 @@ AUC更适合做Rank离线评估的原因有以下几点：
 > 
 > 1.分析一下AUC提升的来源，看看是否对排序有帮助(case 2)
 > 
-> 2.survive bias来背锅(case 3) 
+> 2.Survivorship bias来背锅(case 3) 
