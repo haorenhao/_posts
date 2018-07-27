@@ -55,7 +55,7 @@ Q&A：排序问题的 case 怎么归纳？<font color=red>// TODO</font>
 2. 数据集同步 fix，起码保证 dev 和 test 同步，保证同分布性。
 3. 同时修复时分类错误和正确的 mislabeled，如果只修复分类错误的 mislabel，评估还是有偏的，容易虚高。
 
-## Eyeball／Blackbox dev set ##
+## Eyeball / Blackbox dev set ##
 1. Eyeball 人工随机挑选出看 case 的 dev set。（推荐大小：100+ 个 badcase）
 2. Blackbox 是 dev set 过大，无法（或者没必要）人工全部看，剩下的部分。可以避免 overfit eyeball dev set。
 
