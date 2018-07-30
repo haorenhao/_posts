@@ -1,5 +1,5 @@
 ---
-title: 基于TensorFlow的Wide&Deep Learning 
+title: 基于 TensorFlow 的 Wide&Deep Learning 
 date: 2017-08-15
 tags: [TensorFlow,W&D,Deep learning]
 ---
