@@ -37,11 +37,11 @@ ML 技术应用到传统行业，提升非常明显，这就是“做项目不�
 
 > 常见 Bayesian Optimization:
 > 
-> GP(使用高斯过程对p(y|x)建模，模型自带uncertainty)
+> GP (使用高斯过程对 p(y|x) 建模，模型自带 uncertainty)
 > 
-> SMAC(使用 random forests 对p(y|x)建模，variance 当作 uncertainty)
+> SMAC (使用 random forests 对 p(y|x) 建模，variance 当作 uncertainty)
 > 
-> TPE(使用树模型对p(x|y)和p(y)建模，然后通过[后验概率](https://en.wikipedia.org/wiki/Posterior_probability)计算p(y|x)=p(x|y)*p(y)/p(x)，指定参数后p(x)可以当常数去掉)
+> TPE (使用模型对 p(x|y) 和 p(y) 建模，其中 p(x|y) 使用根据 y 历史值分位数为界限，上下分别用一个高斯分布来拟合。然后通过[后验概率](https://en.wikipedia.org/wiki/Posterior_probability)计算 p(y|x) = p(x|y) * p(y) / p(x))
 > 
 
 - 黑盒优化之外: 在深度学习或大数据下还是太慢了，也有一些其它方式的尝试。
