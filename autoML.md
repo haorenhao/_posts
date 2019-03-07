@@ -147,16 +147,16 @@ trick: 一切皆可超参化。举个实际的例子，在销量预测的场景�
 ## overfitting-to-dev
 借鉴经典的 bias variance trade-off 图，我们可以得到如下的 dev 和 test 集 overfitting 图。随着调优次数的增加，dev 集上的(最优)效果是单调变好的，但次数超过一个阈值后 test 集上的效果就出现 overfitting 了。
 
-<img src="https://raw.githubusercontent.com/EpistasisLab/tpot/master/images/tpot-ml-pipeline.png" width ="1000" alt="An example machine learning pipeline" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/automl/dev_test.png" width ="500" alt="overfitting-to-dev" align=center />
 
 ## anti-overfitting(-to-dev)
 
-1. 滑窗自学习 bagging: 使用滑窗自学习得到多组 dev 效果，取平均值对模型方案做排序，最后选用 Top 1，Top k bagging方案。
-2. 漏斗模式: 使用第一组 dev 选择 Top N 方案，然后固定这 Top N 方案做一次自学习 (dev2)，根据 dev2 的效果重排模型方案，最后选用 Top 1，Top k bagging方案。
+1. 滑窗自学习 bagging: 使用滑窗自学习得到多组 dev 效果，取平均值对模型方案做排序，最后选用 Top 1（或 Top k bagging) 方案。
+2. 漏斗模式: 使用第一组 dev 选择 Top N 方案，然后固定这 Top N 方案做一次自学习 (dev2)，根据 dev2 的效果重排模型方案，最后选用 Top 1 (Top k bagging) 方案。
 
 上述两种方案在流程上有些区别，但本质上都是在降低模型选择中的 variance。
 
-我个人更倾向于方案 2，使用漏斗模式，在 dev 上表现较差的方案（bias 高），应该是没有出现 overfitting-to-dev 的，而且大概率也不会是最终需要的模型(bias 低 & variance 低)
+我个人更倾向于方案 2，使用漏斗模式，在 dev 上表现较差的方案（bias 高），应该是没有出现 overfitting-to-dev 的，而且大概率也不会是最终需要的模型(bias 低 & variance 低)。
 
 # 参考
 1. [NeurIPS 2018: Automatic Machine Learning(AutoML) A Tutorial](https://www.ml4aad.org/wp-content/uploads/2018/12/AutoML-Tutorial-NeurIPS2018-HPO_and_NAS.pdf)
