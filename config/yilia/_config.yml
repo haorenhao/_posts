@@ -113,12 +113,12 @@ slider:
 #smart_menu:
 #  friends: false
 smart_menu:
-  innerArchive: '所有文章'
-  aboutme: '关于我'
-#  friends: '友链'
+  innerArchive: '标签'
+  # aboutme: '关于我'
+  # friends: '友链'
 
 friends:
   友情链接1: http://localhost:4000/
   友情链接2: http://localhost:4000/
 
-aboutme: 'Be a good man'
+aboutme: 'Work smarter'

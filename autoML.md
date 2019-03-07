@@ -1,7 +1,7 @@
 ---
 title: AutoML 及落地实践
 date: 2019-01-31
-tags: [AutoML,AI,2B,落地]
+tags: [AutoML,AI,2B,落地,overfitting,anti-overfitting]
 ---
 
 Automatic Machine Learning(AutoML) 是近几年一个很火的 topic。
@@ -95,8 +95,16 @@ Meta-learning 也常被称为 learning to learn。
 
 AI 2B 大多数应用场景(特别是在 POC 阶段)，机器资源是非常紧张的。AutoML “慢”的问题就成为落地瓶颈了，特别是一些“牛逼”的算法想要用起来很难。反而是一些不起眼的 dirty work 能够带来一些实际帮助，主要是特征工程和超参优化相关的。
 
+我自己的理解，现在的机器学习流程可以分为 human、template 和 auto 三种方式。把它们结合起来用，能会发挥最大的价值。
+
+|  | 特征 | 模型 & 超参 |
+| ------ | ------ | ------ | ------ |
+| auto(tools)| Featuretools 等 | TPOT、Hyperopt 等 |
+| template | domain feature 模版 | 经典网络结构(e.g. 时序问题用RNN)、传统模型选择(e.g. 连续特征使用GBM)等 |
+| human | human knowledge | human knowledge |
+
 ## Auto-Feature-Engineering
-我之前做特征工程的方法主要为"经验" + "case"，这里有很多 trick，需要经验积累，但是做多了却发现有一些通用的地方。
+我之前做特征工程的方法主要为"经验" + "case"，这里有很多 trick。
 > 经验: 主要依赖于领域知识和业界的特征处理经验(e.g. 各种连续值离散化，离散值encode)
 > 
 > case: 分析模型打分或线上应用的 badcase，再猜想问题，做优化，最后做实验验证。
@@ -131,9 +139,24 @@ Auto-Feature-Engineering: 我的理解是特征模版 + 特征衍生 + 特征选
 
 工具大家应该都比较熟悉，这里就不展开说了，分享一个 trick 和坑吧。
 
-trick: 一切皆可超参化。举个实际的例子，在销量预测的场景里，label 的数值变换，是否要分组训练等都是一些可以尝试的点，这样同一组模型超参就需要跑很多遍实验才行。在当时的项目中，相对数据量来说算力还是很充足的，所以我们可以很暴力的做一些超参优化，我们就把这些数据预处理也都当做超参，搭建端到端的 pipline，然后使用 hyperopt 来做自动选择。
+trick: 一切皆可超参化。举个实际的例子，在销量预测的场景里，label 的数值变换，是否要分组训练等都是一些可以尝试的点，同一组模型超参需要跑很多组实验。在当时的项目中，相对数据量来说算力还是很充足的，所以可以比较暴力的做超参优化，我们可以把数据预处理也当做超参，搭建端到端的 pipline，然后使用 hyperopt 来做自动选择。
 
-坑: overfit-to-dev。超参优化有个常见的坑就是 overfit-to-dev，知道这个概念后解决办法就很多了，最普通的做法是 train-dev-test 划分，但我更喜欢 [train-dev & 自学习 train-test] 的划分，这样能更好的处理数据穿越问题，也能更好的体现自学习效果。
+# anti-overfitting(-to-dev) with autoML 
+大部分 automl 是根据 dev 集上的效果做方案选择，那就会出现 overfitting-to-dev 的问题。
+
+## overfitting-to-dev
+借鉴经典的 bias variance trade-off 图，我们可以得到如下的 dev 和 test 集 overfitting 图。随着调优次数的增加，dev 集上的(最优)效果是单调变好的，但次数超过一个阈值后 test 集上的效果就出现 overfitting 了。
+
+<img src="https://raw.githubusercontent.com/EpistasisLab/tpot/master/images/tpot-ml-pipeline.png" width ="1000" alt="An example machine learning pipeline" align=center />
+
+## anti-overfitting(-to-dev)
+
+1. 滑窗自学习 bagging: 使用滑窗自学习得到多组 dev 效果，取平均值对模型方案做排序，最后选用 Top 1，Top k bagging方案。
+2. 漏斗模式: 使用第一组 dev 选择 Top N 方案，然后固定这 Top N 方案做一次自学习 (dev2)，根据 dev2 的效果重排模型方案，最后选用 Top 1，Top k bagging方案。
+
+上述两种方案在流程上有些区别，但本质上都是在降低模型选择中的 variance。
+
+我个人更倾向于方案 2，使用漏斗模式，在 dev 上表现较差的方案（bias 高），应该是没有出现 overfitting-to-dev 的，而且大概率也不会是最终需要的模型(bias 低 & variance 低)
 
 # 参考
 1. [NeurIPS 2018: Automatic Machine Learning(AutoML) A Tutorial](https://www.ml4aad.org/wp-content/uploads/2018/12/AutoML-Tutorial-NeurIPS2018-HPO_and_NAS.pdf)
