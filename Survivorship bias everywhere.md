@@ -28,7 +28,7 @@ Survivorship bias 是机器学习里常见但又容易被忽略的坑。
 
 这种场景，需要特别小心，Survivorship bias 很隐秘，但是影响挺大的，debug 周期较长。我们拿申请反欺诈场景为例展开看一下，下面是一个简化版的流程图。
 
-<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/Survivorship%20bias%20everywhere/2.png" width ="350" alt="申请反欺诈流程图" align=center />
+<img src="https://raw.githubusercontent.com/haorenhao/_posts/master/Survivorship%20bias%20everywhere/2.png" width ="500" alt="申请反欺诈流程图" align=center />
 
 在离线数据中，我们有 A、B、C 三类申请数据（由于 C 类用户没有真实放贷，所以无法区分 C1 和 C2），由于 C 类数据是没有标注的，所以拿 A、B 来构建样本，假设学出来的模型非常牛逼，可以把 A 都拦下来同时把 B 都放过，但是上线后会发生什么呢？
 
